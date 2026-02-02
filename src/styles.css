@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --atlas-taupe: #7d6956;
+  --atlas-taupe-2: #605349;
+  --atlas-beige: #9e9388;
+  --atlas-gray: #c9c6c2;
+  --atlas-navy: #03041c;
+  --atlas-orange: #f6a234;
+  --atlas-orange-2: #fba435;
+  --atlas-accent: #fb752a;
+  --atlas-danger: #ce3f1b;
+  --atlas-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--atlas-white);
+  color: var(--atlas-navy);
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--atlas-orange);
+  color: var(--atlas-white);
+}
+
+@layer components {
+  .atlas-card {
+    @apply rounded-atlas border border-atlas-gray bg-white shadow-atlas-soft;
+  }
+
+  .atlas-title {
+    @apply font-serif text-xl font-semibold text-atlas-navy;
+  }
+
+  .atlas-button-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-atlas-orange px-5 py-2 text-sm font-semibold text-white shadow-atlas transition hover:bg-atlas-orange-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-atlas-orange;
+  }
+
+  .atlas-button-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-atlas-taupe px-4 py-2 text-sm font-semibold text-atlas-taupe transition hover:bg-[rgba(158,147,136,0.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-atlas-taupe;
+  }
+
+  .atlas-input {
+    @apply w-full rounded-lg border border-atlas-gray bg-white px-3 py-2 text-sm text-atlas-navy shadow-sm focus:border-atlas-orange focus:outline-none focus:ring-2 focus:ring-[rgba(246,162,52,0.3)];
+  }
+
+  .atlas-label {
+    @apply mb-1 block text-sm font-semibold text-atlas-taupe-2;
+  }
+}
