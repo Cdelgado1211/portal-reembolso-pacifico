@@ -230,13 +230,22 @@ const Step3Documents = () => {
               Debes contar con al menos un archivo válido en Facturas y en Informe/receta médica.
             </p>
           </div>
+          {/** Botón cambia de estilo según si puede enviar o no */}
           <button
             type="button"
-            className="atlas-button-primary"
+            className={
+              isSubmitDisabled || isSubmitting
+                ? "inline-flex items-center justify-center rounded-full bg-atlas-gray px-5 py-2 text-sm font-semibold text-atlas-beige shadow-atlas transition cursor-not-allowed"
+                : "atlas-button-primary"
+            }
             onClick={handleSubmit}
             disabled={isSubmitDisabled || isSubmitting}
           >
-            {isSubmitting ? "Enviando..." : "Enviar preregistro"}
+            {isSubmitting
+              ? "Enviando..."
+              : isSubmitDisabled
+                ? "Completa los documentos para continuar"
+                : "Enviar preregistro"}
           </button>
         </div>
         {submitError && <p className="mt-3 text-sm text-atlas-danger">{submitError}</p>}

@@ -20,6 +20,9 @@ type SubmitResponse = {
   claimNumber: string;
 };
 
+const VALIDATION_LAMBDA_URL =
+  "https://wdnw5lmd7zejs7o4d5kj22idmm0jdeff.lambda-url.us-east-1.on.aws/";
+
 const delay = (minMs = 600, maxMs = 1200) => {
   const ms = Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -39,6 +42,19 @@ const lower = (value: string) => value.toLowerCase();
 const keywordMatch = (name: string, keywords: string[]) => {
   const file = lower(name);
   return keywords.some((keyword) => file.includes(keyword));
+};
+
+const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      const base64 = result.split(",")[1] ?? "";
+      resolve(base64);
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
 };
 
 const validateRules = (category: UploadCategory, file: File): UploadValidation => {
@@ -108,8 +124,51 @@ export const mockApi = {
   },
 
   async validateUpload(input: { category: UploadCategory; file: File }): Promise<UploadValidation> {
-    await delay();
-    return validateRules(input.category, input.file);
+    const { category, file } = input;
+
+    // Validaciones rápidas locales (tipo y tamaño mínimo) antes de llamar a la IA
+    const quickValidation = validateRules(category, file);
+    if (!quickValidation.valid) {
+      return quickValidation;
+    }
+
+    try {
+      const fileBase64 = await fileToBase64(file);
+
+      const response = await fetch(VALIDATION_LAMBDA_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          file_base64: fileBase64,
+          filename: file.name,
+          category
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Lambda validation failed with status ${response.status}`);
+      }
+
+      const data = (await response.json()) as UploadValidation;
+
+      return {
+        valid: Boolean(data.valid),
+        message:
+          data.message ??
+          (data.valid
+            ? undefined
+            : "El documento no cumple con las reglas de validación automática.")
+      };
+    } catch (error) {
+      // Fallback defensivo: tratamos el archivo como inválido si falla la validación remota
+      console.error("Error validating upload via Lambda:", error);
+      return {
+        valid: false,
+        message: "No pudimos validar este archivo en este momento. Intenta de nuevo más tarde."
+      };
+    }
   },
 
   async submitClaim(payload: {
