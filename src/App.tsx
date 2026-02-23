@@ -12,7 +12,7 @@ import { pathToStep, stepToPath } from "./router";
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { state, resetFlow } = useFlow();
+  const { state } = useFlow();
   const activeStep = pathToStep(location.pathname);
 
   useEffect(() => {

@@ -50,7 +50,7 @@ const fileToBase64 = (file: File): Promise<string> => {
   });
 };
 
-const validateRules = (category: UploadCategory, file: File): UploadValidation => {
+const validateRules = (_category: UploadCategory, file: File): UploadValidation => {
   const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
   if (!allowedTypes.includes(file.type)) {
     return { valid: false, message: "El formato no es válido para esta carga." };
