@@ -6,7 +6,7 @@ type CardProps = {
 };
 
 const Card = ({ children, className = "" }: CardProps) => {
-  return <div className={`atlas-card ${className}`}>{children}</div>;
+  return <div className={`pacifico-card ${className}`}>{children}</div>;
 };
 
 export default Card;

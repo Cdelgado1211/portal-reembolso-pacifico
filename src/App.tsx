@@ -29,7 +29,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <div className="border-b border-atlas-gray bg-white">
+      <div className="border-b border-pacifico-gray bg-white">
         <div className="mx-auto max-w-5xl px-6 py-4">
           <Stepper
             activeStep={activeStep}

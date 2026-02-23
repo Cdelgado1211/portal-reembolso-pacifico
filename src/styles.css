@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --atlas-taupe: #004b8d;
-  --atlas-taupe-2: #005a9e;
-  --atlas-beige: #6b7a90;
-  --atlas-gray: #d4d9e2;
-  --atlas-navy: #14284b;
-  --atlas-orange: #00a6a0;
-  --atlas-orange-2: #29b8b2;
-  --atlas-accent: #00857f;
-  --atlas-danger: #e53935;
-  --atlas-white: #ffffff;
+  --pacifico-taupe: #004b8d;
+  --pacifico-taupe-2: #005a9e;
+  --pacifico-beige: #6b7a90;
+  --pacifico-gray: #d4d9e2;
+  --pacifico-navy: #14284b;
+  --pacifico-orange: #00a6a0;
+  --pacifico-orange-2: #29b8b2;
+  --pacifico-accent: #00857f;
+  --pacifico-danger: #e53935;
+  --pacifico-white: #ffffff;
 }
 
 * {
@@ -22,7 +22,7 @@
 body {
   font-family: "foco", "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background-color: #f3f6fb;
-  color: var(--atlas-navy);
+  color: var(--pacifico-navy);
 }
 
 a {
@@ -30,34 +30,34 @@ a {
 }
 
 ::selection {
-  background: var(--atlas-orange);
-  color: var(--atlas-white);
+  background: var(--pacifico-orange);
+  color: var(--pacifico-white);
 }
 
 @layer components {
-  .atlas-card {
-    @apply rounded-atlas border border-atlas-gray bg-white shadow-atlas-soft;
+  .pacifico-card {
+    @apply rounded-pacifico border border-pacifico-gray bg-white shadow-pacifico-soft;
   }
 
-  .atlas-title {
-    @apply text-xl font-semibold text-atlas-navy;
+  .pacifico-title {
+    @apply text-xl font-semibold text-pacifico-navy;
     font-family: "foco", "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
       sans-serif;
   }
 
-  .atlas-button-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-atlas-orange px-5 py-2 text-sm font-semibold text-white shadow-atlas transition hover:bg-atlas-orange-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-atlas-orange;
+  .pacifico-button-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-pacifico-orange px-5 py-2 text-sm font-semibold text-white shadow-pacifico transition hover:bg-pacifico-orange-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pacifico-orange;
   }
 
-  .atlas-button-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-atlas-taupe px-4 py-2 text-sm font-semibold text-atlas-taupe transition hover:bg-[rgba(158,147,136,0.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-atlas-taupe;
+  .pacifico-button-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-pacifico-taupe px-4 py-2 text-sm font-semibold text-pacifico-taupe transition hover:bg-[rgba(158,147,136,0.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pacifico-taupe;
   }
 
-  .atlas-input {
-    @apply w-full rounded-lg border border-atlas-gray bg-white px-3 py-2 text-sm text-atlas-navy shadow-sm focus:border-atlas-orange focus:outline-none focus:ring-2 focus:ring-[rgba(246,162,52,0.3)];
+  .pacifico-input {
+    @apply w-full rounded-lg border border-pacifico-gray bg-white px-3 py-2 text-sm text-pacifico-navy shadow-sm focus:border-pacifico-orange focus:outline-none focus:ring-2 focus:ring-[rgba(246,162,52,0.3)];
   }
 
-  .atlas-label {
-    @apply mb-1 block text-sm font-semibold text-atlas-taupe-2;
+  .pacifico-label {
+    @apply mb-1 block text-sm font-semibold text-pacifico-taupe-2;
   }
 }

@@ -34,7 +34,7 @@ const isTokenValid = (token?: string | null, expiresAt?: number | null) => {
 };
 
 const createToken = () => {
-  return `atlas-${Math.random().toString(36).slice(2, 10)}`;
+  return `pacifico-${Math.random().toString(36).slice(2, 10)}`;
 };
 
 const fileToBase64 = (file: File): Promise<string> => {

@@ -21,31 +21,31 @@ const Stepper = ({ activeStep, maxStep, onStepChange }: StepperProps) => {
             <div key={item.step} className="flex flex-col items-center">
               <div className="flex w-full items-center">
                 <div
-                  className={`h-px flex-1 ${index === 0 ? "bg-transparent" : leftComplete ? "bg-atlas-orange" : "bg-atlas-gray"}`}
+                  className={`h-px flex-1 ${index === 0 ? "bg-transparent" : leftComplete ? "bg-pacifico-orange" : "bg-pacifico-gray"}`}
                   aria-hidden="true"
                 />
                 <button
                   type="button"
                   onClick={() => isClickable && onStepChange(item.step)}
                   disabled={!isClickable}
-                  className={`flex h-8 w-8 items-center justify-center rounded-full border text-xs font-semibold transition ${
+                    className={`flex h-8 w-8 items-center justify-center rounded-full border text-xs font-semibold transition ${
                     isReached
-                      ? "border-atlas-orange bg-atlas-orange text-white"
-                      : "border-atlas-gray bg-white text-atlas-taupe"
+                      ? "border-pacifico-orange bg-pacifico-orange text-white"
+                      : "border-pacifico-gray bg-white text-pacifico-taupe"
                   } ${isActive ? "ring-2 ring-[rgba(246,162,52,0.4)]" : ""}`}
                   aria-current={isActive ? "step" : undefined}
                 >
                   {item.step}
                 </button>
                 <div
-                  className={`h-px flex-1 ${index === steps.length - 1 ? "bg-transparent" : rightComplete ? "bg-atlas-orange" : "bg-atlas-gray"}`}
+                  className={`h-px flex-1 ${index === steps.length - 1 ? "bg-transparent" : rightComplete ? "bg-pacifico-orange" : "bg-pacifico-gray"}`}
                   aria-hidden="true"
                 />
               </div>
               <div
                 title={item.label}
                 className={`mt-2 w-full truncate text-center text-[11px] font-semibold ${
-                  isReached ? "text-atlas-taupe-2" : "text-atlas-gray"
+                  isReached ? "text-pacifico-taupe-2" : "text-pacifico-gray"
                 }`}
               >
                 {item.label}
@@ -54,7 +54,7 @@ const Stepper = ({ activeStep, maxStep, onStepChange }: StepperProps) => {
           );
         })}
       </div>
-      <p className="text-xs text-atlas-beige">
+      <p className="text-xs text-pacifico-beige">
         Avanza paso a paso. Solo puedes regresar a pasos ya completados.
       </p>
     </div>

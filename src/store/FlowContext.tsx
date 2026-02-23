@@ -40,9 +40,9 @@ type FlowAction =
   | { type: "SET_LOCK_UNTIL"; payload: number | null }
   | { type: "RESET_FLOW" };
 
-const FLOW_KEY = "atlas_flow_state_v1";
-const ATTEMPT_KEY = "atlas_attempt_count";
-const LOCK_KEY = "atlas_lock_until";
+const FLOW_KEY = "pacifico_flow_state_v1";
+const ATTEMPT_KEY = "pacifico_attempt_count";
+const LOCK_KEY = "pacifico_lock_until";
 
 const emptyUploads: Record<UploadCategory, UploadItem[]> = {
   invoices: [],

@@ -22,13 +22,13 @@ const Step4Confirm = () => {
   return (
     <div className="space-y-6">
       <Card className="p-6">
-        <h1 className="atlas-title">Confirmación</h1>
-        <div className="mt-4 rounded-lg border border-atlas-gray bg-white px-4 py-4">
-          <p className="text-sm text-atlas-taupe-2">Número de registro:</p>
-          <p className="mt-1 text-lg font-semibold text-atlas-navy">{state.claimNumber}</p>
-          <p className="mt-3 text-sm text-atlas-beige">Te enviamos una confirmación por email.</p>
+        <h1 className="pacifico-title">Confirmación</h1>
+        <div className="mt-4 rounded-lg border border-pacifico-gray bg-white px-4 py-4">
+          <p className="text-sm text-pacifico-taupe-2">Número de registro:</p>
+          <p className="mt-1 text-lg font-semibold text-pacifico-navy">{state.claimNumber}</p>
+          <p className="mt-3 text-sm text-pacifico-beige">Te enviamos una confirmación por email.</p>
         </div>
-        <button type="button" className="atlas-button-primary mt-6" onClick={handleNew}>
+        <button type="button" className="pacifico-button-primary mt-6" onClick={handleNew}>
           Iniciar nuevo registro
         </button>
       </Card>

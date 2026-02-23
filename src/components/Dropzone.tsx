@@ -2,10 +2,10 @@ import { useRef, useState, type DragEvent, type KeyboardEvent } from "react";
 import { UploadCategory, UploadItem } from "../store/FlowContext";
 
 const statusStyles: Record<string, string> = {
-  pending: "bg-[rgba(201,198,194,0.4)] text-atlas-taupe-2",
+  pending: "bg-[rgba(201,198,194,0.4)] text-pacifico-taupe-2",
   valid: "bg-[#e7f7d9] text-[#4c9b2f]",
-  invalid: "bg-[rgba(206,63,27,0.15)] text-atlas-danger",
-  validating: "bg-[rgba(158,147,136,0.3)] text-atlas-taupe-2"
+  invalid: "bg-[rgba(206,63,27,0.15)] text-pacifico-danger",
+  validating: "bg-[rgba(158,147,136,0.3)] text-pacifico-taupe-2"
 };
 
 type DropzoneProps = {
@@ -46,10 +46,10 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
   };
 
   return (
-    <div className="atlas-card p-5">
+    <div className="pacifico-card p-5">
       <div className="flex items-center justify-between">
-        <h3 className="atlas-title text-lg">{title}</h3>
-        <span className="text-xs font-semibold text-atlas-beige">
+        <h3 className="pacifico-title text-lg">{title}</h3>
+        <span className="text-xs font-semibold text-pacifico-beige">
           {required ? "Requerido" : "Opcional"}
         </span>
       </div>
@@ -67,12 +67,12 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
         onDrop={handleDrop}
         className={`mt-4 flex min-h-[120px] flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-4 py-6 text-center text-sm transition ${
           isDragging
-            ? "border-[#004b8d] bg-[rgba(0,75,141,0.06)]"
+              ? "border-[#004b8d] bg-[rgba(0,75,141,0.06)]"
             : hasInvalid
               ? "border-[#e86a24] bg-[#fff7f4]"
               : allValid
                 ? "border-[#61b433] bg-[#f8fff0]"
-                : "border-atlas-gray bg-atlas-white"
+                : "border-pacifico-gray bg-pacifico-white"
         }`}
       >
         <input
@@ -100,16 +100,16 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
             <span>Hay documentos inválidos, revisa la lista inferior.</span>
           </div>
         )}
-        <span className="font-semibold text-atlas-taupe-2">Arrastra y suelta aquí</span>
-        <span className="text-xs text-atlas-beige">PDF, JPG o PNG</span>
-        <button type="button" className="atlas-button-secondary mt-2">
+        <span className="font-semibold text-pacifico-taupe-2">Arrastra y suelta aquí</span>
+        <span className="text-xs text-pacifico-beige">PDF, JPG o PNG</span>
+        <button type="button" className="pacifico-button-secondary mt-2">
           Seleccionar archivos
         </button>
       </div>
 
       <div className="mt-4 space-y-3">
         {files.length === 0 && (
-          <p className="text-xs text-atlas-beige">Aún no hay archivos cargados.</p>
+          <p className="text-xs text-pacifico-beige">Aún no hay archivos cargados.</p>
         )}
         {files.map((file) => {
           const isInvalid = file.status === "invalid";
@@ -117,15 +117,15 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
             <div
               key={file.id}
               className={`rounded-lg border px-3 py-2 ${
-                isInvalid ? "border-[#e86a24] bg-[#fff3ec]" : "border-atlas-gray bg-white"
+                isInvalid ? "border-[#e86a24] bg-[#fff3ec]" : "border-pacifico-gray bg-white"
               }`}
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className={`text-sm font-semibold ${isInvalid ? "text-[#e86a24]" : "text-atlas-navy"}`}>
+                  <p className={`text-sm font-semibold ${isInvalid ? "text-[#e86a24]" : "text-pacifico-navy"}`}>
                     {file.name}
                   </p>
-                  <p className="text-xs text-atlas-beige">{Math.ceil(file.size / 1024)} KB</p>
+                  <p className="text-xs text-pacifico-beige">{Math.ceil(file.size / 1024)} KB</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span
@@ -142,7 +142,7 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
                           : "Pendiente"}
                   </span>
                   {file.status === "validating" && (
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-atlas-beige border-t-transparent" />
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-pacifico-beige border-t-transparent" />
                   )}
                   <button
                     type="button"
@@ -158,7 +158,7 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
                   className={`mt-2 leading-relaxed ${
                     isInvalid
                       ? "text-sm font-semibold text-[#d8461f]"
-                      : "text-xs text-atlas-danger"
+                      : "text-xs text-pacifico-danger"
                   }`}
                 >
                   {file.message}

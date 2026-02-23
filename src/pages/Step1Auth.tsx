@@ -62,73 +62,73 @@ const Step1Auth = () => {
   return (
     <div className="space-y-6">
       <Card className="mx-auto max-w-md p-6">
-        <h1 className="atlas-title">Paso 1: Autenticación</h1>
-        <p className="mt-2 text-sm text-atlas-beige">
+        <h1 className="pacifico-title">Paso 1: Autenticación</h1>
+        <p className="mt-2 text-sm text-pacifico-beige">
           Ingresa tu información para continuar con la validación de documentos.
         </p>
 
         {isLocked && (
-          <div className="mt-4 rounded-lg border border-atlas-gray bg-[rgba(201,198,194,0.3)] px-4 py-3 text-sm text-atlas-taupe-2">
+          <div className="mt-4 rounded-lg border border-pacifico-gray bg-[rgba(201,198,194,0.3)] px-4 py-3 text-sm text-pacifico-taupe-2">
             Demasiados intentos. Intenta de nuevo más tarde.
           </div>
         )}
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="atlas-label" htmlFor="policyNumber">
+            <label className="pacifico-label" htmlFor="policyNumber">
               Número de póliza
             </label>
             <input
               id="policyNumber"
               type="text"
-              className="atlas-input"
+              className="pacifico-input"
               value={policyNumber}
               onChange={(event) => setPolicyNumber(event.target.value)}
               disabled={isLocked || isSubmitting}
             />
             {fieldErrors.policyNumber && (
-              <p className="mt-1 text-xs text-atlas-danger">{fieldErrors.policyNumber}</p>
+              <p className="mt-1 text-xs text-pacifico-danger">{fieldErrors.policyNumber}</p>
             )}
           </div>
 
           <div>
-            <label className="atlas-label" htmlFor="dateOfBirth">
+            <label className="pacifico-label" htmlFor="dateOfBirth">
               Fecha de nacimiento
             </label>
             <input
               id="dateOfBirth"
               type="date"
-              className="atlas-input"
+              className="pacifico-input"
               value={dateOfBirth}
               onChange={(event) => setDateOfBirth(event.target.value)}
               disabled={isLocked || isSubmitting}
             />
             {fieldErrors.dateOfBirth && (
-              <p className="mt-1 text-xs text-atlas-danger">{fieldErrors.dateOfBirth}</p>
+              <p className="mt-1 text-xs text-pacifico-danger">{fieldErrors.dateOfBirth}</p>
             )}
           </div>
 
           <div>
-            <label className="flex items-center gap-2 text-sm text-atlas-taupe-2">
+            <label className="flex items-center gap-2 text-sm text-pacifico-taupe-2">
               <input
                 type="checkbox"
                 checked={captchaChecked}
                 onChange={(event) => setCaptchaChecked(event.target.checked)}
                 disabled={isLocked || isSubmitting}
-                className="h-4 w-4 rounded border-atlas-gray text-atlas-orange focus:ring-atlas-orange"
+                className="h-4 w-4 rounded border-pacifico-gray text-pacifico-orange focus:ring-pacifico-orange"
               />
               No soy un robot
             </label>
             {fieldErrors.captcha && (
-              <p className="mt-1 text-xs text-atlas-danger">{fieldErrors.captcha}</p>
+              <p className="mt-1 text-xs text-pacifico-danger">{fieldErrors.captcha}</p>
             )}
           </div>
 
-          {errorMessage && <p className="text-sm text-atlas-danger">{errorMessage}</p>}
+          {errorMessage && <p className="text-sm text-pacifico-danger">{errorMessage}</p>}
 
           <button
             type="submit"
-            className="atlas-button-primary"
+            className="pacifico-button-primary"
             disabled={isLocked || isSubmitting}
           >
             {isSubmitting ? "Validando..." : "Continuar"}

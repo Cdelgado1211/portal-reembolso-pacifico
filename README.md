@@ -1,4 +1,4 @@
-# Portal Reembolsos Atlas Demo
+# Portal Reembolsos Pacífico Demo
 
 Demo web app para el preregistro de reembolsos (Paso 1: carga y validación de documentos).
 
