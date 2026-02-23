@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Header from "./components/Header";
+import { Header } from "./components/Header";
 import Stepper from "./components/Stepper";
 import Step1Auth from "./pages/Step1Auth";
 import Step2Insured from "./pages/Step2Insured";
@@ -26,14 +26,9 @@ const App = () => {
     }
   }, [activeStep, location.pathname, navigate, state.currentStep]);
 
-  const handleReset = () => {
-    resetFlow();
-    navigate("/step1");
-  };
-
   return (
     <div className="min-h-screen bg-white">
-      <Header onReset={handleReset} />
+      <Header />
       <div className="border-b border-atlas-gray bg-white">
         <div className="mx-auto max-w-5xl px-6 py-4">
           <Stepper

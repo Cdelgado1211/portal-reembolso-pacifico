@@ -3,7 +3,7 @@ import { UploadCategory, UploadItem } from "../store/FlowContext";
 
 const statusStyles: Record<string, string> = {
   pending: "bg-[rgba(201,198,194,0.4)] text-atlas-taupe-2",
-  valid: "bg-[rgba(246,162,52,0.15)] text-atlas-orange",
+  valid: "bg-[#e7f7d9] text-[#4c9b2f]",
   invalid: "bg-[rgba(206,63,27,0.15)] text-atlas-danger",
   validating: "bg-[rgba(158,147,136,0.3)] text-atlas-taupe-2"
 };
@@ -20,6 +20,8 @@ type DropzoneProps = {
 const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: DropzoneProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const allValid = files.length > 0 && files.every((file) => file.status === "valid");
+  const hasInvalid = files.some((file) => file.status === "invalid");
 
   const handleFiles = (fileList: FileList | File[]) => {
     if (!fileList || fileList.length === 0) return;
@@ -65,8 +67,12 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
         onDrop={handleDrop}
         className={`mt-4 flex min-h-[120px] flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-4 py-6 text-center text-sm transition ${
           isDragging
-            ? "border-atlas-orange bg-[rgba(246,162,52,0.1)]"
-            : "border-atlas-gray bg-atlas-white"
+            ? "border-[#004b8d] bg-[rgba(0,75,141,0.06)]"
+            : hasInvalid
+              ? "border-[#e86a24] bg-[#fff7f4]"
+              : allValid
+                ? "border-[#61b433] bg-[#f8fff0]"
+                : "border-atlas-gray bg-atlas-white"
         }`}
       >
         <input
@@ -82,6 +88,18 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
             }
           }}
         />
+        {allValid && (
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#e7f7d9] px-4 py-2 text-xs font-semibold text-[#4c9b2f]">
+            <span className="text-base leading-none">✔</span>
+            <span>Todos los documentos de esta sección son válidos.</span>
+          </div>
+        )}
+        {hasInvalid && (
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#ffe3db] px-4 py-2 text-xs font-semibold text-[#d8461f]">
+            <span className="text-base leading-none">✕</span>
+            <span>Hay documentos inválidos, revisa la lista inferior.</span>
+          </div>
+        )}
         <span className="font-semibold text-atlas-taupe-2">Arrastra y suelta aquí</span>
         <span className="text-xs text-atlas-beige">PDF, JPG o PNG</span>
         <button type="button" className="atlas-button-secondary mt-2">
@@ -93,40 +111,62 @@ const Dropzone = ({ title, required, category, files, onFilesAdded, onRemove }: 
         {files.length === 0 && (
           <p className="text-xs text-atlas-beige">Aún no hay archivos cargados.</p>
         )}
-        {files.map((file) => (
-          <div key={file.id} className="rounded-lg border border-atlas-gray bg-white px-3 py-2">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p className="text-sm font-semibold text-atlas-navy">{file.name}</p>
-                <p className="text-xs text-atlas-beige">{Math.ceil(file.size / 1024)} KB</p>
+        {files.map((file) => {
+          const isInvalid = file.status === "invalid";
+          return (
+            <div
+              key={file.id}
+              className={`rounded-lg border px-3 py-2 ${
+                isInvalid ? "border-[#e86a24] bg-[#fff3ec]" : "border-atlas-gray bg-white"
+              }`}
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p className={`text-sm font-semibold ${isInvalid ? "text-[#e86a24]" : "text-atlas-navy"}`}>
+                    {file.name}
+                  </p>
+                  <p className="text-xs text-atlas-beige">{Math.ceil(file.size / 1024)} KB</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      statusStyles[file.status] ?? statusStyles.pending
+                    }`}
+                  >
+                    {file.status === "validating"
+                      ? "Validando..."
+                      : file.status === "valid"
+                        ? "Válido"
+                        : file.status === "invalid"
+                          ? "Documento inválido"
+                          : "Pendiente"}
+                  </span>
+                  {file.status === "validating" && (
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-atlas-beige border-t-transparent" />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => onRemove(category, file.id)}
+                    className="text-xs font-semibold text-[#e86a24] hover:underline"
+                  >
+                    Quitar
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <span
-                  className={`rounded-full px-2 py-1 text-xs font-semibold ${
-                    statusStyles[file.status] ?? statusStyles.pending
+              {file.message && (
+                <p
+                  className={`mt-2 leading-relaxed ${
+                    isInvalid
+                      ? "text-sm font-semibold text-[#d8461f]"
+                      : "text-xs text-atlas-danger"
                   }`}
                 >
-                  {file.status === "validating" ? "Validando..." :
-                  file.status === "valid" ? "Válido" :
-                  file.status === "invalid" ? "Inválido" : "Pendiente"}
-                </span>
-                {file.status === "validating" && (
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-atlas-beige border-t-transparent" />
-                )}
-                <button
-                  type="button"
-                  onClick={() => onRemove(category, file.id)}
-                  className="text-xs font-semibold text-atlas-danger hover:underline"
-                >
-                  Quitar
-                </button>
-              </div>
+                  {file.message}
+                </p>
+              )}
             </div>
-            {file.message && (
-              <p className="mt-1 text-xs text-atlas-danger">{file.message}</p>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

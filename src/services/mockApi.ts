@@ -37,13 +37,6 @@ const createToken = () => {
   return `atlas-${Math.random().toString(36).slice(2, 10)}`;
 };
 
-const lower = (value: string) => value.toLowerCase();
-
-const keywordMatch = (name: string, keywords: string[]) => {
-  const file = lower(name);
-  return keywords.some((keyword) => file.includes(keyword));
-};
-
 const fileToBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -62,35 +55,6 @@ const validateRules = (category: UploadCategory, file: File): UploadValidation =
   if (!allowedTypes.includes(file.type)) {
     return { valid: false, message: "El formato no es válido para esta carga." };
   }
-
-  if (file.size < 25 * 1024) {
-    return {
-      valid: false,
-      message: "El archivo parece ilegible o de baja calidad (validación demo)."
-    };
-  }
-
-  const fileName = lower(file.name);
-  if (category === "invoices") {
-    const invoiceKeywords = ["factura", "invoice", "farmacia", "clinic"];
-    if (!keywordMatch(fileName, invoiceKeywords)) {
-      return { valid: false, message: "El archivo no parece corresponder a esta categoría." };
-    }
-    if (fileName.includes("old") || fileName.includes("2023")) {
-      return {
-        valid: false,
-        message: "La factura está fuera del rango permitido (regla demo)."
-      };
-    }
-  }
-
-  if (category === "medical") {
-    const medicalKeywords = ["receta", "informe", "medical", "diagnostico", "rx"];
-    if (!keywordMatch(fileName, medicalKeywords)) {
-      return { valid: false, message: "El archivo no parece corresponder a esta categoría." };
-    }
-  }
-
   return { valid: true };
 };
 

@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --atlas-taupe: #7d6956;
-  --atlas-taupe-2: #605349;
-  --atlas-beige: #9e9388;
-  --atlas-gray: #c9c6c2;
-  --atlas-navy: #03041c;
-  --atlas-orange: #f6a234;
-  --atlas-orange-2: #fba435;
-  --atlas-accent: #fb752a;
-  --atlas-danger: #ce3f1b;
+  --atlas-taupe: #004b8d;
+  --atlas-taupe-2: #005a9e;
+  --atlas-beige: #6b7a90;
+  --atlas-gray: #d4d9e2;
+  --atlas-navy: #14284b;
+  --atlas-orange: #00a6a0;
+  --atlas-orange-2: #29b8b2;
+  --atlas-accent: #00857f;
+  --atlas-danger: #e53935;
   --atlas-white: #ffffff;
 }
 
@@ -20,8 +20,8 @@
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: var(--atlas-white);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f3f6fb;
   color: var(--atlas-navy);
 }
 
